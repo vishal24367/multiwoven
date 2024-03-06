@@ -101,4 +101,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["./bin/bash", "-c", "./app/temporal/cli/register_namespace && ./app/temporal/cli/worker"]
+CMD ["bash", "-c", "rails/app/temporal/cli/register_namespace && rails/app/temporal/cli/worker"]
