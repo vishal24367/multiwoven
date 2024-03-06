@@ -45,7 +45,7 @@ services:
       - TEMPORAL_CORS_ORIGINS=http://localhost:3000
     image: temporalio/ui:${TEMPORAL_UI_VERSION}
     ports:
-      - 8080:8080
+      - 8081:8081
   # Multiwoven services
   db:
     image: postgres:latest

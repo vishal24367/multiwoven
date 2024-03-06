@@ -14,7 +14,7 @@ RSpec.describe Multiwoven::Integrations::Source::Redshift::Client do # rubocop:d
             "password": ENV["REDSHIFT_PASSWORD"]
           },
           "host": "test.pg.com",
-          "port": "8080",
+          "port": "8081",
           "database": "test_database",
           "schema": "test_schema"
         }

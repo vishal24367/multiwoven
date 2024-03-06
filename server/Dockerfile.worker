@@ -1,21 +1,21 @@
 # syntax = docker/dockerfile:1
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
+
 ARG RUBY_VERSION=3.2.0
 FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 
-# Rails app lives here
+
 WORKDIR /rails
 
-# Set environment variables for production
-ENV BUNDLE_DEPLOYMENT=1
-ENV BUNDLE_WITHOUT=development
+# Set environment variables for development
+ENV BUNDLE_DEPLOYMENT=0
+ENV BUNDLE_WITHOUT=''
 ENV BUNDLE_PATH=/usr/local/bundle
-ENV RAILS_ENV=production
+ENV RAILS_ENV=development
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
-
 # Install packages needed for building, including Libtool
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential autoconf automake libtool git libpq-dev libvips pkg-config m4 perl libltdl-dev
@@ -100,5 +100,4 @@ USER rails:rails
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
 CMD ["bash", "-c", "./app/temporal/cli/register_namespace && ./app/temporal/cli/worker"]
